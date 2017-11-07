@@ -4,7 +4,7 @@ int prNew; //new voltage drop read
 int chk_1;
 int x;
 int chk_2;
-int ledPin[] = {7,8,9,10};
+int ledPin[] = {8,9,10,11};
 
 void setup() {
   Serial.begin(9600); // start serial monitor  
@@ -21,8 +21,15 @@ void setup() {
 
 void loop() {
   chk_1 = analogRead(prPin); // read first value   
+ 
+ // Serial.print(chk_1); // print count
+ 
   delay(100); // delay between two read values, change delay time to increase sensitivity ****
   chk_2 = analogRead(prPin); // read second value to compare to
+  
+   // Serial.print("    "); 
+  // Serial.println(chk_2); // print coun
+
 // Primary loop to detect falling edge of darkness values, change difference value to titrate sensitivity ****
   if((chk_1 - chk_2) > 80 ) {
     chk_2 = analogRead(prPin); // read second value
