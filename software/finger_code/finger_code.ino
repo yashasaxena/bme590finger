@@ -6,7 +6,7 @@ int x;
 int v;
 int chk_2;
 int val;
-int reset = 12; // push variable for reset
+int resetPin = 12; // push variable for reset
 int ledPin[] = {8,9,10,11};
 
 void setup() {
@@ -44,24 +44,28 @@ void displayBinary(byte numToShow){
 }
 
 // Function to check for finger counting event
+// CHANGE VARIABLES WITH STARS IN COMMENTS TO ADJUST SENSITIVITY
+
 void fingerTrem(){
   chk_1 = analogRead(prPin); // read first value   
-  delay(80); // delay between two read values, change delay time to increase sensitivity ****
+  delay(70); // delay between two read values, change delay time to increase sensitivity ****
   chk_2 = analogRead(prPin); // read second value to compare to
 // Primary loop to detect falling edge of darkness values, change difference value to titrate sensitivity ****
-  if((chk_1 - chk_2) > 100 ) {
+  if((chk_1 - chk_2) > 80 ) {
     chk_2 = analogRead(prPin); // read second value
 // Secondary loop to count values, by comparing checked values to initial--- adjust difference value ****
-      if ((v_init - chk_2) > 160) { 
+      if ((v_init - chk_2) > 80) { 
         x = x+1; // add to the counter
+        Serial.println(x);
         displayBinary(x); // run function to convert to binary
+        
           }
     }  
 }
 
 // Reset counter if button pressed
 void displayReset(){
-  val = digitalRead(reset);
+  val = digitalRead(resetPin);
       if (val == 1){
         x = 0;
         displayBinary(x);
