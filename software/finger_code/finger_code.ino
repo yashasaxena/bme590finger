@@ -69,6 +69,7 @@ void displayReset(){
       if (val == 1){
         x = 0;
         displayBinary(x);
+        v_init = analogRead(prPin);
      }  
 }
 
