@@ -51,7 +51,7 @@ void fingerTrem(){
   delay(70); // delay between two read values, change delay time to increase sensitivity ****
   chk_2 = analogRead(prPin); // read second value to compare to
 // Primary loop to detect falling edge of darkness values, change difference value to titrate sensitivity ****
-  if((chk_1 - chk_2) > 40 ) {
+  if((chk_1 - chk_2) > 30 ) {
     chk_2 = analogRead(prPin); // read second value
 // Secondary loop to count values, by comparing checked values to initial--- adjust difference value ****
       if ((v_init - chk_2) > 50) { 
