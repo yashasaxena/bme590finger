@@ -1,4 +1,4 @@
-int prPin = A0;
+int prPin = A1;
 int v_init; //initial light reading
 int prNew; //new voltage drop read
 int chk_1;
@@ -6,13 +6,13 @@ int x;
 int v;
 int chk_2;
 int val;
-int resetPin = 12; // push variable for reset
-int ledPin[] = {8,9,10,11};
+int resetPin = 8; // push variable for reset
+int ledPin[] = {9,10,11,12};
 
 void setup() {
   Serial.begin(9600); // start serial monitor  
-  pinMode(13, OUTPUT); // set output pin
-  pinMode(12, INPUT); // set reset pin
+  //pinMode(13, OUTPUT); // set output pin
+  pinMode(8, INPUT); // set reset pin
   v_init = analogRead(prPin); // set initial brightness reading to check against
   Serial.println(v_init); // print initial brightness value
   x = 0; // set counter to zero
@@ -51,10 +51,10 @@ void fingerTrem(){
   delay(70); // delay between two read values, change delay time to increase sensitivity ****
   chk_2 = analogRead(prPin); // read second value to compare to
 // Primary loop to detect falling edge of darkness values, change difference value to titrate sensitivity ****
-  if((chk_1 - chk_2) > 80 ) {
+  if((chk_1 - chk_2) > 40 ) {
     chk_2 = analogRead(prPin); // read second value
 // Secondary loop to count values, by comparing checked values to initial--- adjust difference value ****
-      if ((v_init - chk_2) > 80) { 
+      if ((v_init - chk_2) > 50) { 
         x = x+1; // add to the counter
         Serial.println(x);
         displayBinary(x); // run function to convert to binary
@@ -63,7 +63,7 @@ void fingerTrem(){
     }  
 }
 
-// Reset counter if button pressed
+//Reset counter if button pressed
 void displayReset(){
   val = digitalRead(resetPin);
       if (val == 1){
