@@ -48,14 +48,15 @@ void displayBinary(byte numToShow){
 
 void fingerTrem(){
   chk_1 = analogRead(prPin); // read first value   
-  delay(70); // delay between two read values, change delay time to increase sensitivity ****
+  delay(80); // delay between two read values, change delay time to increase sensitivity ****
   chk_2 = analogRead(prPin); // read second value to compare to
 // Primary loop to detect falling edge of darkness values, change difference value to titrate sensitivity ****
-  if((chk_1 - chk_2) > 35 ) {
+  if((chk_1 - chk_2) > 75 ) {
     chk_2 = analogRead(prPin); // read second value
 // Secondary loop to count values, by comparing checked values to initial--- adjust difference value ****
-      if ((v_init - chk_2) > 80) { 
+      if ((v_init - chk_2) > 90) { 
         x = x+1; // add to the counter
+        delay(40);
         Serial.println(x);
         displayBinary(x); // run function to convert to binary
         
